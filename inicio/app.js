@@ -32,7 +32,7 @@ const DOM = {
 // ===================================
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🔐 BANCO ACME - Iniciando sistema SIN BUCLES...');
+    console.log('BANCO ACME - Iniciando sistema SIN BUCLES...');
     
     // Limpiar cualquier redirección automática
     clearAutoRedirects();
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     waitForFirebase().then(() => {
         initializeAuth();
     }).catch(error => {
-        console.error('❌ Error al cargar Firebase:', error);
+        console.error('Error al cargar Firebase:', error);
         showNotification('Error de conexión. Verifica tu internet.', 'error');
     });
 });
@@ -52,7 +52,7 @@ function clearAutoRedirects() {
     isProcessingLogin = false;
     userInitiatedLogin = false;
     
-    console.log('🧹 Estados de redirección limpiados');
+    console.log('Estados de redirección limpiados');
 }
 
 // Esperar a que Firebase esté disponible
@@ -77,7 +77,7 @@ async function waitForFirebase() {
 // Inicializar sistema de autenticación
 function initializeAuth() {
     try {
-        console.log('🔧 Inicializando autenticación...');
+        console.log('Inicializando autenticación...');
         
         // Inicializar elementos del DOM
         initializeDOMElements();
@@ -91,10 +91,10 @@ function initializeAuth() {
         // Mostrar formulario de login SIEMPRE al cargar
         showLoginForm();
         
-        console.log('✅ Sistema de autenticación listo - SIN BUCLES');
+        console.log('Sistema de autenticación listo - SIN BUCLES');
         
     } catch (error) {
-        console.error('❌ Error al inicializar autenticación:', error);
+        console.error('Error al inicializar autenticación:', error);
         showNotification('Error al inicializar el sistema', 'error');
     }
 }
@@ -129,7 +129,7 @@ function initializeDOMElements() {
     DOM.notificationIcon = DOM.notification?.querySelector('.notification-icon');
     DOM.notificationClose = DOM.notification?.querySelector('.notification-close');
     
-    console.log('📋 Elementos DOM del login inicializados');
+    console.log('Elementos DOM del login inicializados');
 }
 
 function setupEventListeners() {
@@ -143,7 +143,7 @@ function setupEventListeners() {
     // Cerrar notificaciones
     DOM.notificationClose?.addEventListener('click', hideNotification);
     
-    console.log('🎯 Event listeners del login configurados');
+    console.log('Event listeners del login configurados');
 }
 
 // ===================================
@@ -157,19 +157,19 @@ function setupAuthObserverNoRedirect() {
     }
     
     firebaseFunctions.onAuthStateChanged(auth, (user) => {
-        console.log('🔐 Observer activado - Usuario:', user ? user.email : 'Ninguno');
+        console.log('Observer activado - Usuario:', user ? user.email : 'Ninguno');
         
         currentUser = user;
         
         // SOLO redirigir si el usuario inició login manualmente
         if (user && userInitiatedLogin) {
-            console.log('✅ Login exitoso detectado - procediendo a dashboard');
+            console.log('Login exitoso detectado - procediendo a dashboard');
             proceedToDashboard(user);
         } else if (user && !userInitiatedLogin) {
-            console.log('👤 Sesión existente detectada pero NO iniciada por usuario - manteniendo en login');
+            console.log('Sesión existente detectada pero NO iniciada por usuario - manteniendo en login');
             // NO redirigir automáticamente - dejar al usuario decidir
         } else if (!user) {
-            console.log('🔓 No hay usuario - manteniendo en login');
+            console.log('No hay usuario - manteniendo en login');
             // Resetear flags
             isProcessingLogin = false;
             userInitiatedLogin = false;
@@ -185,7 +185,7 @@ async function handleUserLogin(e) {
     e.preventDefault();
     
     if (isProcessingLogin) {
-        console.log('⏳ Login ya en proceso...');
+        console.log('Login ya en proceso...');
         return;
     }
     
@@ -207,7 +207,7 @@ async function handleUserLogin(e) {
         isProcessingLogin = true;
         userInitiatedLogin = true; // MARCAR que fue iniciado por el usuario
         
-        console.log('🔑 USUARIO INICIÓ LOGIN para:', email);
+        console.log('USUARIO INICIÓ LOGIN para:', email);
         
         // Mostrar estado de carga
         updateSubmitButton(true, 'Iniciando sesión...');
@@ -217,7 +217,7 @@ async function handleUserLogin(e) {
         const userCredential = await firebaseFunctions.signInWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
         
-        console.log('✅ Credenciales válidas para:', user.email);
+        console.log('Credenciales válidas para:', user.email);
         
         // El observer detectará esto y redirigirá porque userInitiatedLogin = true
         
@@ -226,7 +226,7 @@ async function handleUserLogin(e) {
         isProcessingLogin = false;
         userInitiatedLogin = false;
         
-        console.error('❌ Error en login:', error);
+        console.error('Error en login:', error);
         
         // Mostrar error específico
         let errorMessage = 'Error al iniciar sesión';
@@ -295,7 +295,7 @@ async function handleUserRegister(e) {
         isProcessingLogin = true;
         userInitiatedLogin = true; // MARCAR que fue iniciado por el usuario
         
-        console.log('📝 USUARIO INICIÓ REGISTRO para:', email);
+        console.log('USUARIO INICIÓ REGISTRO para:', email);
         
         updateSubmitButton(true, 'Creando cuenta...');
         showNotification('Creando tu cuenta...', 'info', 0);
@@ -304,7 +304,7 @@ async function handleUserRegister(e) {
         const userCredential = await firebaseFunctions.createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
         
-        console.log('✅ Cuenta creada para:', user.email);
+        console.log('Cuenta creada para:', user.email);
         
         // El observer detectará esto y redirigirá porque userInitiatedLogin = true
         
@@ -313,7 +313,7 @@ async function handleUserRegister(e) {
         isProcessingLogin = false;
         userInitiatedLogin = false;
         
-        console.error('❌ Error en registro:', error);
+        console.error('Error en registro:', error);
         
         let errorMessage = 'Error al crear la cuenta';
         
@@ -343,7 +343,7 @@ async function handleUserRegister(e) {
 
 async function proceedToDashboard(user) {
     try {
-        console.log('🏦 Procesando ingreso al dashboard para:', user.email);
+        console.log('Procesando ingreso al dashboard para:', user.email);
         
         // Crear datos del usuario
         const userData = {
@@ -359,7 +359,7 @@ async function proceedToDashboard(user) {
         
         // Guardar en sessionStorage
         sessionStorage.setItem('userData', JSON.stringify(userData));
-        console.log('💾 Datos guardados en sessionStorage');
+        console.log('Datos guardados en sessionStorage');
         
         // Resetear flags
         isProcessingLogin = false;
@@ -370,12 +370,12 @@ async function proceedToDashboard(user) {
         
         // Redirigir después de delay
         setTimeout(() => {
-            console.log('🔄 Redirigiendo a dashboard...');
+            console.log('Redirigiendo a dashboard...');
             window.location.href = '../dashboard/Dashboard.html';
         }, 1500);
         
     } catch (error) {
-        console.error('❌ Error al procesar dashboard:', error);
+        console.error('Error al procesar dashboard:', error);
         isProcessingLogin = false;
         userInitiatedLogin = false;
         showNotification('Error al procesar datos', 'error');
@@ -477,7 +477,7 @@ function isValidEmail(email) {
 
 function showNotification(message, type = 'info', duration = 5000) {
     if (!DOM.notification || !DOM.notificationMessage || !DOM.notificationIcon) {
-        console.log(`📢 ${type.toUpperCase()}: ${message}`);
+        console.log(`${type.toUpperCase()}: ${message}`);
         return;
     }
     
@@ -509,7 +509,7 @@ function showNotification(message, type = 'info', duration = 5000) {
         }, duration);
     }
     
-    console.log(`📢 ${type.toUpperCase()}: ${message}`);
+    console.log(`${type.toUpperCase()}: ${message}`);
 }
 
 function hideNotification() {
@@ -524,7 +524,7 @@ function hideNotification() {
 // ===================================
 
 function resetCompleteState() {
-    console.log('🧹 RESETEO COMPLETO DEL ESTADO');
+    console.log('RESETEO COMPLETO DEL ESTADO');
     
     // Limpiar variables de control
     isProcessingLogin = false;
@@ -549,7 +549,7 @@ function resetCompleteState() {
     showLoginForm();
     hideNotification();
     
-    console.log('✅ Estado completamente reseteado');
+    console.log('Estado completamente reseteado');
 }
 
 // ===================================
@@ -572,5 +572,5 @@ window.authDebug = {
     }
 };
 
-console.log('🔐 Sistema de login SIN BUCLES cargado');
-console.log('🔧 Debug: window.authDebug.resetComplete() para limpiar todo');
+console.log('Sistema de login SIN BUCLES cargado');
+console.log('Debug: window.authDebug.resetComplete() para limpiar todo');
