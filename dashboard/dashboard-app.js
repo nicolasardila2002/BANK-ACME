@@ -240,22 +240,21 @@ async function ensureUserInFirestore() {
                 ...userDataForFirestore,
                 createdAt: new Date().toISOString()
             });
-            console.log('✅ Usuario creado en Firestore para búsquedas');
+            console.log(' Usuario creado en Firestore para búsquedas');
         } else {
             // Actualizar documento existente
             await userRef.update(userDataForFirestore);
-            console.log('✅ Usuario actualizado en Firestore');
+            console.log(' Usuario actualizado en Firestore');
         }
         
     } catch (error) {
-        console.error('❌ Error al guardar usuario en Firestore:', error);
+        console.error(' Error al guardar usuario en Firestore:', error);
         // No es crítico si falla, el sistema sigue funcionando
     }
 }
 
-// ===================================
 // ELEMENTOS DEL DOM
-// ===================================
+
 
 const DOM = {
     notification: null,
@@ -271,10 +270,10 @@ function initializeDOMElements() {
         DOM.notificationIcon = DOM.notification?.querySelector('.notification-icon');
         DOM.notificationClose = DOM.notification?.querySelector('.notification-close');
         
-        console.log('📋 Elementos DOM del dashboard inicializados');
+        console.log(' Elementos DOM del dashboard inicializados');
         
     } catch (error) {
-        console.error('❌ Error al inicializar elementos DOM:', error);
+        console.error(' Error al inicializar elementos DOM:', error);
     }
 }
 
@@ -323,10 +322,10 @@ function setupEventListeners() {
         // Cerrar notificaciones
         DOM.notificationClose?.addEventListener('click', hideNotification);
         
-        console.log('🎯 Event listeners del dashboard configurados');
+        console.log(' Event listeners del dashboard configurados');
         
     } catch (error) {
-        console.error('❌ Error al configurar event listeners:', error);
+        console.error('Error al configurar event listeners:', error);
     }
 }
 
@@ -367,9 +366,9 @@ function setupFormListeners() {
     }
 }
 
-// ===================================
+
 // NAVEGACIÓN ENTRE SECCIONES
-// ===================================
+
 
 function navigateToSection(sectionName) {
     try {
@@ -412,10 +411,10 @@ function navigateToSection(sectionName) {
         // Inicializar datos específicos de la sección
         initializeSectionData(sectionName);
         
-        console.log('📖 Navegando a sección:', sectionName);
+        console.log(' Navegando a sección:', sectionName);
         
     } catch (error) {
-        console.error('❌ Error al navegar:', error);
+        console.error(' Error al navegar:', error);
     }
 }
 
@@ -458,16 +457,16 @@ function initializeBankingSystem() {
         // Mostrar dashboard por defecto
         navigateToSection('dashboard');
         
-        console.log('✅ Sistema bancario inicializado');
+        console.log(' Sistema bancario inicializado');
         
     } catch (error) {
-        console.error('❌ Error al inicializar sistema bancario:', error);
+        console.error(' Error al inicializar sistema bancario:', error);
     }
 }
 
-// ===================================
+
 // GESTIÓN DE TRANSACCIONES
-// ===================================
+
 
 function generateReferenceNumber() {
     const timestamp = Date.now().toString();
@@ -500,7 +499,7 @@ function createTransaction(type, description, amount, serviceType = null) {
     // Guardar en localStorage
     saveTransactionsToStorage();
     
-    console.log('✅ Transacción creada:', transaction);
+    console.log(' Transacción creada:', transaction);
     return transaction;
 }
 
@@ -514,10 +513,10 @@ function saveTransactionsToStorage() {
         };
         
         localStorage.setItem('bankAccountData', JSON.stringify(dataToSave));
-        console.log('💾 Datos guardados en localStorage');
+        console.log(' Datos guardados en localStorage');
         
     } catch (error) {
-        console.error('❌ Error al guardar datos:', error);
+        console.error(' Error al guardar datos:', error);
     }
 }
 
@@ -531,13 +530,13 @@ function loadTransactionsFromStorage() {
             console.log('📄 Transacciones cargadas desde localStorage');
         }
     } catch (error) {
-        console.error('❌ Error al cargar transacciones:', error);
+        console.error(' Error al cargar transacciones:', error);
     }
 }
 
-// ===================================
+
 // INTERFAZ DE USUARIO
-// ===================================
+
 
 function updateUserInterface() {
     try {
@@ -574,10 +573,10 @@ function updateUserInterface() {
             }
         });
         
-        console.log('✅ Interfaz de usuario actualizada');
+        console.log(' Interfaz de usuario actualizada');
         
     } catch (error) {
-        console.error('❌ Error al actualizar interfaz de usuario:', error);
+        console.error(' Error al actualizar interfaz de usuario:', error);
     }
 }
 
@@ -600,10 +599,10 @@ function updateDashboardInterface() {
         // Actualizar actividad reciente
         displayRecentActivity();
         
-        console.log('✅ Dashboard actualizado');
+        console.log('Dashboard actualizado');
         
     } catch (error) {
-        console.error('❌ Error al actualizar dashboard:', error);
+        console.error(' Error al actualizar dashboard:', error);
     }
 }
 
@@ -632,9 +631,9 @@ function displayRecentActivity() {
     `).join('');
 }
 
-// ===================================
+
 // RESUMEN DE TRANSACCIONES
-// ===================================
+
 
 function displayTransactions() {
     const transactionsTable = document.getElementById('transactionsTable');
@@ -680,9 +679,8 @@ function displayTransactions() {
     `;
 }
 
-// ===================================
 // CONSIGNACIÓN ELECTRÓNICA
-// ===================================
+
 
 function initializeDepositForm() {
     updateUserInterface();
@@ -715,14 +713,14 @@ async function handleDeposit(e) {
         showNotification('Consignación realizada exitosamente', 'success');
         
     } catch (error) {
-        console.error('❌ Error en consignación:', error);
+        console.error (' Error en consignación:', error);
         showNotification('Error al procesar la consignación', 'error');
     }
 }
 
-// ===================================
+
 // RETIRO DE DINERO
-// ===================================
+
 
 function initializeWithdrawalForm() {
     updateUserInterface();
@@ -760,14 +758,14 @@ async function handleWithdrawal(e) {
         showNotification('Retiro realizado exitosamente', 'success');
         
     } catch (error) {
-        console.error('❌ Error en retiro:', error);
+        console.error(' Error en retiro:', error);
         showNotification('Error al procesar el retiro', 'error');
     }
 }
 
-// ===================================
+
 // PAGO DE SERVICIOS PÚBLICOS
-// ===================================
+
 
 function initializeBillsForm() {
     updateUserInterface();
@@ -824,14 +822,14 @@ async function handleBillPayment(e) {
         showNotification('Pago realizado exitosamente', 'success');
         
     } catch (error) {
-        console.error('❌ Error en pago de servicios:', error);
+        console.error(' Error en pago de servicios:', error);
         showNotification('Error al procesar el pago', 'error');
     }
 }
 
-// ===================================
+
 // EXTRACTO BANCARIO
-// ===================================
+
 
 function initializeStatementForm() {
     updateUserInterface();
