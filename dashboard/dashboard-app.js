@@ -873,7 +873,7 @@ async function handleStatementRequest(e) {
         showNotification('Extracto generado exitosamente', 'success');
         
     } catch (error) {
-        console.error('❌ Error al generar extracto:', error);
+        console.error(' Error al generar extracto:', error);
         showNotification('Error al generar el extracto', 'error');
     }
 }
@@ -939,9 +939,9 @@ function displayStatement(transactions, year, month) {
     statementResults.style.display = 'block';
 }
 
-// ===================================
+
 // CERTIFICADO BANCARIO
-// ===================================
+
 
 function generateCertificate() {
     updateUserInterface();
@@ -957,9 +957,8 @@ function generateCertificate() {
     }
 }
 
-// ===================================
+
 // TRANSFERIR DINERO
-// ===================================
 
 function initializeTransferForm() {
     updateUserInterface();
@@ -1004,7 +1003,7 @@ async function handleUserSearch(e) {
         displaySearchResults(foundUser, recipientEmail);
         
     } catch (error) {
-        console.error('❌ Error en búsqueda:', error);
+        console.error(' Error en búsqueda:', error);
         showNotification('Error al buscar usuario', 'error');
     }
 }
@@ -1029,7 +1028,7 @@ async function simulateUserSearch(email) {
         return await searchWithAuth(email);
         
     } catch (error) {
-        console.error('❌ Error en búsqueda:', error);
+        console.error(' Error en búsqueda:', error);
         // Fallback a búsqueda local si hay error
         return await searchInLocalUsers(email);
     }
@@ -1038,7 +1037,7 @@ async function simulateUserSearch(email) {
 // Buscar en Firestore
 async function searchInFirestore(email) {
     try {
-        console.log('🔍 Buscando en Firestore:', email);
+        console.log(' Buscando en Firestore:', email);
         
         const db = window.firebaseFirestore;
         const usersRef = db.collection('users');
@@ -1048,7 +1047,7 @@ async function searchInFirestore(email) {
             const userDoc = querySnapshot.docs[0];
             const userData = userDoc.data();
             
-            console.log('✅ Usuario encontrado en Firestore:', userData);
+            console.log(' Usuario encontrado en Firestore:', userData);
             
             return {
                 email: userData.email,
@@ -1057,11 +1056,11 @@ async function searchInFirestore(email) {
             };
         }
         
-        console.log('❌ Usuario no encontrado en Firestore');
+        console.log(' Usuario no encontrado en Firestore');
         return null;
         
     } catch (error) {
-        console.error('❌ Error buscando en Firestore:', error);
+        console.error(' Error buscando en Firestore:', error);
         return null;
     }
 }
@@ -1069,7 +1068,7 @@ async function searchInFirestore(email) {
 // Buscar usando Firebase Auth (método alternativo)
 async function searchWithAuth(email) {
     try {
-        console.log('🔍 Buscando con Auth methods:', email);
+        console.log(' Buscando con Auth methods:', email);
         
         // Intentar obtener información básica del usuario
         // Nota: Firebase Auth no permite buscar otros usuarios directamente por seguridad
@@ -1083,7 +1082,7 @@ async function searchWithAuth(email) {
         
         // Simular búsqueda exitosa para emails con formato válido
         // En un entorno real, esto debería conectarse a tu backend o Cloud Functions
-        console.log('⚠️ Simulando búsqueda con Auth - considera implementar Cloud Functions');
+        console.log(' Simulando búsqueda con Auth - considera implementar Cloud Functions');
         
         return {
             email: email,
@@ -1092,14 +1091,14 @@ async function searchWithAuth(email) {
         };
         
     } catch (error) {
-        console.error('❌ Error en búsqueda con Auth:', error);
+        console.error(' Error en búsqueda con Auth:', error);
         return null;
     }
 }
 
 // Búsqueda local como fallback
 async function searchInLocalUsers(email) {
-    console.log('🔍 Búsqueda local para:', email);
+    console.log(' Búsqueda local para:', email);
     
     // Lista de usuarios de prueba expandida
     const mockUsers = [
@@ -1114,9 +1113,9 @@ async function searchInLocalUsers(email) {
     const foundUser = mockUsers.find(user => user.email.toLowerCase() === email.toLowerCase());
     
     if (foundUser) {
-        console.log('✅ Usuario encontrado localmente:', foundUser);
+        console.log(' Usuario encontrado localmente:', foundUser);
     } else {
-        console.log('❌ Usuario no encontrado localmente');
+        console.log(' Usuario no encontrado localmente');
     }
     
     return foundUser || null;
@@ -1293,7 +1292,7 @@ function confirmTransfer() {
         }, 3000);
         
     } catch (error) {
-        console.error('❌ Error en transferencia:', error);
+        console.error(' Error en transferencia:', error);
         showNotification('Error al procesar la transferencia', 'error');
     }
 }
@@ -1303,9 +1302,9 @@ function cancelTransfer() {
     showNotification('Transferencia cancelada', 'info');
 }
 
-// ===================================
+
 // RESUMEN DE TRANSACCIÓN
-// ===================================
+
 
 function displayTransactionSummary(transaction) {
     const modal = document.getElementById('transactionModal');
@@ -1414,9 +1413,9 @@ function closeTransactionModal() {
     }
 }
 
-// ===================================
+
 // FUNCIONES DE IMPRESIÓN
-// ===================================
+
 
 function printTransactions() {
     const printContent = generateTransactionsPrintContent();
@@ -1633,13 +1632,13 @@ function openPrintWindow(content, title) {
     printWindow.print();
 }
 
-// ===================================
+
 // LOGOUT Y REDIRECCIÓN
-// ===================================
+
 
 async function handleLogout() {
     try {
-        console.log('🚪 DASHBOARD: Iniciando logout MANUAL...');
+        console.log(' DASHBOARD: Iniciando logout MANUAL...');
         showNotification('Cerrando sesión...', 'info');
         
         redirectReason = 'LOGOUT_MANUAL';
@@ -1649,14 +1648,14 @@ async function handleLogout() {
         
         if (auth && firebaseFunctions) {
             await firebaseFunctions.signOut(auth);
-            console.log('✅ DASHBOARD: Sesión de Firebase cerrada');
+            console.log(' DASHBOARD: Sesión de Firebase cerrada');
         }
         
-        console.log('✅ DASHBOARD: Logout completado');
+        console.log(' DASHBOARD: Logout completado');
         redirectToLogin('LOGOUT_MANUAL');
         
     } catch (error) {
-        console.error('❌ DASHBOARD: Error al cerrar sesión:', error);
+        console.error(' DASHBOARD: Error al cerrar sesión:', error);
         showNotification('Error al cerrar sesión', 'error');
         setTimeout(() => {
             redirectToLogin('LOGOUT_ERROR');
@@ -1666,12 +1665,12 @@ async function handleLogout() {
 
 function redirectToLogin(reason = 'UNKNOWN') {
     if (isRedirecting) {
-        console.log('⚠️ DASHBOARD: Ya redirigiendo al login, ignorando...');
+        console.log(' DASHBOARD: Ya redirigiendo al login, ignorando...');
         return;
     }
     
     if (preventRedirect && reason !== 'LOGOUT_MANUAL') {
-        console.log('🛡️ DASHBOARD: Redirección automática bloqueada - Razón:', reason);
+        console.log(' DASHBOARD: Redirección automática bloqueada - Razón:', reason);
         return;
     }
     
@@ -1704,14 +1703,14 @@ function redirectToLogin(reason = 'UNKNOWN') {
     showNotification(message, 'info', 2000);
     
     setTimeout(() => {
-        console.log('🔄 DASHBOARD: Ejecutando redirección a /incio/');
+        console.log(' DASHBOARD: Ejecutando redirección a /incio/');
         window.location.href = '../incio/index.html';
     }, 1000);
 }
 
-// ===================================
+
 // SISTEMA DE NOTIFICACIONES
-// ===================================
+
 
 function showNotification(message, type = 'info', duration = 5000) {
     if (!DOM.notification || !DOM.notificationMessage || !DOM.notificationIcon) {
@@ -1739,7 +1738,7 @@ function showNotification(message, type = 'info', duration = 5000) {
         setTimeout(hideNotification, duration);
     }
     
-    console.log(`📢 ${type.toUpperCase()}: ${message}`);
+    console.log(` ${type.toUpperCase()}: ${message}`);
 }
 
 function hideNotification() {
@@ -1749,9 +1748,9 @@ function hideNotification() {
     }
 }
 
-// ===================================
+
 // FUNCIONES GLOBALES PARA WINDOW
-// ===================================
+
 
 // Hacer funciones disponibles globalmente para los botones HTML
 window.selectRecipient = selectRecipient;
@@ -1763,9 +1762,9 @@ window.printStatement = printStatement;
 window.printCertificate = printCertificate;
 window.printTransactionSummary = printTransactionSummary;
 
-// ===================================
+
 // FUNCIONES DE DEBUG
-// ===================================
+
 
 if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
     window.bankingDebug = {
@@ -1779,14 +1778,14 @@ if (window.location.hostname === 'localhost' || window.location.hostname === '12
             accountData.transactions = [];
             saveTransactionsToStorage();
             updateDashboardInterface();
-            console.log('🔄 Cuenta reseteada');
+            console.log(' Cuenta reseteada');
         },
         addTestData: () => {
             createTransaction('Consignación', 'Consignación de prueba', 50000);
             createTransaction('Retiro', 'Retiro de prueba', 25000);
             createTransaction('Retiro', 'Pago de servicio público Energía', 15000, 'Energía');
             updateDashboardInterface();
-            console.log('✅ Datos de prueba agregados');
+            console.log(' Datos de prueba agregados');
         },
         navigateTo: (section) => navigateToSection(section),
         getSelectedRecipient: () => selectedRecipient,
@@ -1802,9 +1801,9 @@ if (window.location.hostname === 'localhost' || window.location.hostname === '12
             console.log('🧪 Probando búsqueda de usuario:', email);
             const result = await simulateUserSearch(email);
             if (result) {
-                console.log('✅ Usuario encontrado:', result);
+                console.log(' Usuario encontrado:', result);
             } else {
-                console.log('❌ Usuario no encontrado');
+                console.log(' Usuario no encontrado');
             }
             return result;
         },
@@ -1812,10 +1811,10 @@ if (window.location.hostname === 'localhost' || window.location.hostname === '12
         checkFirestoreConnection: async () => {
             if (window.checkFirestoreConnection) {
                 const connected = await window.checkFirestoreConnection();
-                console.log('🔍 Estado Firestore:', connected ? '✅ Conectado' : '❌ Desconectado');
+                console.log(' Estado Firestore:', connected ? ' Conectado' : ' Desconectado');
                 return connected;
             } else {
-                console.log('⚠️ Función de verificación Firestore no disponible');
+                console.log(' Función de verificación Firestore no disponible');
                 return false;
             }
         },
@@ -1823,22 +1822,22 @@ if (window.location.hostname === 'localhost' || window.location.hostname === '12
         listFirestoreUsers: async () => {
             if (window.firestoreDebug && window.firestoreDebug.listUsers) {
                 const count = await window.firestoreDebug.listUsers();
-                console.log(`📊 Total usuarios en Firestore: ${count}`);
+                console.log(` Total usuarios en Firestore: ${count}`);
                 return count;
             } else {
-                console.log('⚠️ Debug de Firestore no disponible');
+                console.log(' Debug de Firestore no disponible');
                 return 0;
             }
         },
         
         forceUserToFirestore: async () => {
-            console.log('🔧 Forzando guardado de usuario actual en Firestore...');
+            console.log(' Forzando guardado de usuario actual en Firestore...');
             try {
                 await ensureUserInFirestore();
-                console.log('✅ Usuario guardado en Firestore exitosamente');
+                console.log(' Usuario guardado en Firestore exitosamente');
                 return true;
             } catch (error) {
-                console.error('❌ Error guardando usuario:', error);
+                console.error(' Error guardando usuario:', error);
                 return false;
             }
         },
@@ -1847,21 +1846,21 @@ if (window.location.hostname === 'localhost' || window.location.hostname === '12
             if (window.firestoreDebug && window.firestoreDebug.searchUser) {
                 return await window.firestoreDebug.searchUser(email);
             } else {
-                console.log('⚠️ Búsqueda específica no disponible - usando búsqueda normal');
+                console.log(' Búsqueda específica no disponible - usando búsqueda normal');
                 return await simulateUserSearch(email);
             }
         },
         
         diagnoseTransferSearch: () => {
-            console.log('🔍 DIAGNÓSTICO DE BÚSQUEDA DE TRANSFERENCIAS');
+            console.log(' DIAGNÓSTICO DE BÚSQUEDA DE TRANSFERENCIAS');
             console.log('===============================================');
-            console.log('🔥 Firebase Auth:', !!window.firebaseAuth);
-            console.log('🗄️ Firestore:', !!window.firebaseFirestore);
-            console.log('👤 Usuario actual:', currentUser?.email || 'No autenticado');
-            console.log('📧 Email usuario:', userData?.email || 'No disponible');
-            console.log('🔧 Debug Firestore:', !!window.firestoreDebug);
+            console.log(' Firebase Auth:', !!window.firebaseAuth);
+            console.log(' Firestore:', !!window.firebaseFirestore);
+            console.log(' Usuario actual:', currentUser?.email || 'No autenticado');
+            console.log(' Email usuario:', userData?.email || 'No disponible');
+            console.log(' Debug Firestore:', !!window.firestoreDebug);
             console.log('===============================================');
-            console.log('💡 Comandos útiles:');
+            console.log(' Comandos útiles:');
             console.log('window.bankingDebug.testUserSearch("email@test.com")');
             console.log('window.bankingDebug.checkFirestoreConnection()');
             console.log('window.bankingDebug.listFirestoreUsers()');
@@ -1869,8 +1868,8 @@ if (window.location.hostname === 'localhost' || window.location.hostname === '12
         }
     };
     
-    console.log('🔧 Funciones de debug disponibles en window.bankingDebug');
-    console.log('💡 Para diagnosticar búsquedas: window.bankingDebug.diagnoseTransferSearch()');
+    console.log(' Funciones de debug disponibles en window.bankingDebug');
+    console.log(' Para diagnosticar búsquedas: window.bankingDebug.diagnoseTransferSearch()');
 }
 
-console.log('🏦 Sistema Bancario ACME - Dashboard funcional completo cargado');
+console.log(' Sistema Bancario ACME - Dashboard funcional completo cargado');
