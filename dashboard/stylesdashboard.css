@@ -1,7 +1,6 @@
-/* ===================================
-   BANCO ACME - SISTEMA BANCARIO COMPLETO
-   Archivo: stylesdashboard.css
-   =================================== */
+
+   /* BANCO ACME */
+ 
 
 /* Reset y configuración base */
 * {
@@ -318,9 +317,9 @@ body {
     display: block;
 }
 
-/* ===================================
-   DASHBOARD Y RESUMEN
-   =================================== */
+
+   /* DASHBOARD Y RESUMEN */
+   
 
 /* Tarjetas de resumen */
 .summary-cards {
@@ -498,9 +497,9 @@ body {
     color: var(--primary-blue);
 }
 
-/* ===================================
-   FORMULARIOS Y TRANSFERENCIAS
-   =================================== */
+
+   /* FORMULARIOS Y TRANSFERENCIAS */
+  
 
 .form-container {
     background: var(--white);
@@ -978,9 +977,9 @@ body {
     color: var(--white);
 }
 
-/* ===================================
-   TABLAS DE TRANSACCIONES
-   =================================== */
+
+   /* TABLAS DE TRANSACCIONES */
+  
 
 .transactions-container {
     background: var(--white);
@@ -1070,9 +1069,9 @@ body {
     background: var(--light-gray);
 }
 
-/* ===================================
-   EXTRACTO BANCARIO
-   =================================== */
+
+   /* EXTRACTO BANCARIO */
+   
 
 .statement-results {
     margin-top: 2rem;
@@ -1100,9 +1099,9 @@ body {
     font-size: var(--font-size-normal);
 }
 
-/* ===================================
-   CERTIFICADO BANCARIO
-   =================================== */
+
+   /* CERTIFICADO BANCARIO */
+   
 
 .certificate-container {
     background: var(--white);
@@ -1223,9 +1222,9 @@ body {
     font-weight: 600;
 }
 
-/* ===================================
-   MODAL DE TRANSACCIÓN
-   =================================== */
+
+   /* MODAL DE TRANSACCIÓN */
+   
 
 .modal {
     display: none;
@@ -1322,9 +1321,9 @@ body {
     border-top: 2px solid var(--light-gray);
 }
 
-/* ===================================
-   SISTEMA DE NOTIFICACIONES
-   =================================== */
+
+   /* SISTEMA DE NOTIFICACIONES */
+   
 
 .notification {
     position: fixed;
@@ -1392,9 +1391,9 @@ body {
     }
 }
 
-/* ===================================
-   RESPONSIVE DESIGN
-   =================================== */
+
+   /* RESPONSIVE DESIGN */
+   
 
 /* Tablets */
 @media (max-width: 1024px) {
