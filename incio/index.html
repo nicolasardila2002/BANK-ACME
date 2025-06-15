@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -123,135 +122,12 @@
     <!-- Scripts -->
     <script type="module" src="firebase-config.js"></script>
     <script src="app.js"></script>
+    <script src="respaldo.js"></script>
+    <script src="diagnostico.js"></script>
+    <script src="auto.js"></script>
+    <script src="emergencia.js"></script>
+
     
-    <!-- SCRIPT DE EMERGENCIA ANTI-BUCLES -->
-    <script>
-        // ===================================
-        // SCRIPT DE EMERGENCIA ANTI-BUCLES
-        // ===================================
-        
-        console.log('🚨 SCRIPT DE EMERGENCIA ANTI-BUCLES ACTIVADO');
-        
-        // Función de emergencia para parar bucles
-        function emergencyStopLoop() {
-            console.log('🛑 PARANDO BUCLES DE EMERGENCIA');
-            
-            // 1. Detener todos los observers y timeouts
-            if (window.firebaseAuth && window.firebaseFunctions) {
-                try {
-                    window.firebaseFunctions.signOut(window.firebaseAuth);
-                } catch (e) {
-                    console.log('Observer ya desconectado');
-                }
-            }
-            
-            // 2. Limpiar TODOS los datos de almacenamiento
-            sessionStorage.clear();
-            localStorage.clear();
-            
-            // 3. Limpiar variables globales conocidas
-            if (window.authDebug) {
-                window.authDebug.resetComplete();
-            }
-            
-            // 4. Resetear flags conocidos
-            window.isProcessingLogin = false;
-            window.userInitiatedLogin = false;
-            window.isDashboardInitialized = false;
-            window.authChecked = false;
-            window.isRedirecting = false;
-            
-            console.log('🧹 Estado completamente limpiado');
-            
-            // 5. Forzar ir al login después de 2 segundos
-            setTimeout(() => {
-                console.log('🔄 Forzando redirección al login...');
-                window.location.href = '/incio/index.html';
-            }, 2000);
-        }
-        
-        // Función para diagnosticar bucles
-        function diagnoseBucleLoop() {
-            console.log('🔍 DIAGNÓSTICO DE BUCLES');
-            console.log('========================');
-            
-            const currentPath = window.location.pathname;
-            console.log('📍 Ubicación:', currentPath);
-            
-            // Verificar redirects en el historial
-            if (window.performance && window.performance.navigation) {
-                console.log('📜 Redirects:', window.performance.navigation.redirectCount);
-            }
-            
-            // Verificar datos de almacenamiento
-            console.log('💾 SessionStorage:', Object.keys(sessionStorage));
-            console.log('💾 LocalStorage:', Object.keys(localStorage));
-            
-            // Verificar Firebase
-            console.log('🔥 Usuario Firebase:', window.firebaseAuth?.currentUser?.email || 'Ninguno');
-            
-            console.log('========================');
-        }
-        
-        // Auto-detectar bucles por redirects excesivos
-        function autoDetectLoop() {
-            if (window.performance && window.performance.navigation.redirectCount > 5) {
-                console.log('🚨 BUCLE DETECTADO AUTOMÁTICAMENTE - Activando emergencia');
-                emergencyStopLoop();
-                return true;
-            }
-            return false;
-        }
-        
-        // Hacer funciones disponibles globalmente
-        window.emergencyAntiLoop = {
-            stop: emergencyStopLoop,
-            diagnose: diagnoseBucleLoop,
-            autoDetect: autoDetectLoop
-        };
-        
-        // Ejecutar auto-detección
-        autoDetectLoop();
-        
-        // Ejecutar diagnóstico automático
-        setTimeout(() => {
-            diagnoseBucleLoop();
-        }, 1000);
-        
-        console.log('🔧 FUNCIONES DE EMERGENCIA DISPONIBLES:');
-        console.log('window.emergencyAntiLoop.stop() → Parar bucles y limpiar todo');
-        console.log('window.emergencyAntiLoop.diagnose() → Diagnosticar estado actual');
-    </script>
-    
-    <!-- Script de verificación adicional -->
-    <script>
-        // Diagnóstico de autenticación mejorado
-        console.log('🔍 BANCO ACME - Verificando estado...');
-        console.log('URL actual:', window.location.href);
-        
-        // Verificar si hay datos de sesión previos
-        const existingData = sessionStorage.getItem('userData');
-        if (existingData) {
-            console.log('⚠️ Hay datos de sesión existentes');
-            try {
-                const userData = JSON.parse(existingData);
-                console.log('👤 Usuario en sesión:', userData.email);
-                console.log('💡 El sistema debe determinar si redirigir automáticamente o no');
-            } catch (e) {
-                console.log('❌ Datos de sesión corruptos - limpiando...');
-                sessionStorage.removeItem('userData');
-            }
-        } else {
-            console.log('✅ No hay sesión previa - perfecto para login manual');
-        }
-        
-        // Verificar redirects excesivos
-        if (window.performance && window.performance.navigation.redirectCount > 3) {
-            console.log('🚨 ADVERTENCIA: Muchos redirects detectados (' + window.performance.navigation.redirectCount + ')');
-            console.log('💡 Si hay bucle, usa: window.emergencyAntiLoop.stop()');
-        }
-        
-        console.log('✅ Diagnóstico completado - Listo para login');
-    </script>
+   
 </body>
 </html>

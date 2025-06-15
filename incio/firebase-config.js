@@ -34,9 +34,9 @@ try {
     auth = getAuth(app);
     analytics = getAnalytics(app);
     
-    console.log('🔥 Firebase inicializado correctamente para Banco ACME');
+    console.log('Firebase inicializado correctamente para Banco ACME');
 } catch (error) {
-    console.error('❌ Error al inicializar Firebase:', error);
+    console.error('Error al inicializar Firebase:', error);
 }
 
 // Configuración adicional para Auth
@@ -71,7 +71,7 @@ window.checkFirebaseConnection = async () => {
 
 // Log de información para debugging (solo en desarrollo)
 if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-    console.log('🔧 Modo desarrollo - Firebase Config cargado');
-    console.log('📊 Analytics habilitado:', !!analytics);
-    console.log('🔐 Auth configurado:', !!auth);
+    console.log('Modo desarrollo - Firebase Config cargado');
+    console.log('Analytics habilitado:', !!analytics);
+    console.log('Auth configurado:', !!auth);
 }
