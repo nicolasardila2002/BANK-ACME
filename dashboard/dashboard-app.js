@@ -184,10 +184,10 @@ async function loadUserDataSafely() {
         updateUserInterface();
         updateDashboardInterface();
         
-        console.log('✅ DASHBOARD: Datos de usuario cargados completamente');
+        console.log(' DASHBOARD: Datos de usuario cargados completamente');
         
     } catch (error) {
-        console.error('❌ DASHBOARD: Error al cargar datos:', error);
+        console.error(' DASHBOARD: Error al cargar datos:', error);
         showNotification('Error al cargar datos - continuando con datos básicos', 'warning');
         
         if (currentUser) {
@@ -211,7 +211,7 @@ async function loadUserDataSafely() {
 async function ensureUserInFirestore() {
     try {
         if (!window.firebaseFirestore || !currentUser) {
-            console.log('⚠️ Firestore no disponible o usuario no autenticado');
+            console.log(' Firestore no disponible o usuario no autenticado');
             return;
         }
         
