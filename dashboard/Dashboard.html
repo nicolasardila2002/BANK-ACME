@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Banco ACME</title>
+
+    <!-- Enlaces a archivos CSS -->
+    <link rel="stylesheet" href="stylesdashboard.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏦</text></svg>">
+</head>
+
+<body>
+    <!-- Botón menú para móviles -->
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Overlay para cerrar menú en móvil -->
+    <div class="menu-overlay" id="menuOverlay"></div>
+
+    <div class="dashboard-container">
+        <!-- Barra lateral -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-university"></i>
+                    <h1 style="color: white;">BANCO ACME</h1>
+                </div>
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="user-details">
+                        <span class="user-name" id="userName" style="color: white;">Cargando...</span>
+                        <span class="user-email" id="userEmail" style="color: white;" cargando@email.com</span>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section">
+                    <h3 class="nav-title">Gestión de Cuenta</h3>
+                    <a href="#" class="nav-item active" data-section="dashboard">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Resumen de Cuenta</span>
+                    </a>
+                    <a href="#" class="nav-item" data-section="transactions">
+                        <i class="fas fa-exchange-alt"></i>
+                        <span>Resumen de Transacciones</span>
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-title">Operaciones</h3>
+                    <a href="#" class="nav-item" data-section="transfer">
+                        <i class="fas fa-paper-plane"></i>
+                        <span>Transferir Dinero</span>
+                    </a>
+                    <a href="#" class="nav-item" data-section="deposit">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Consignación Electrónica</span>
+                    </a>
+                    <a href="#" class="nav-item" data-section="withdrawal">
+                        <i class="fas fa-minus-circle"></i>
+                        <span>Retiro de Dinero</span>
+                    </a>
+                    <a href="#" class="nav-item" data-section="bills">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                        <span>Pago de Servicios</span>
+                    </a>
+                </div>
+
+                <div class="nav-section">
+                    <h3 class="nav-title">Reportes</h3>
+                    <a href="#" class="nav-item" data-section="statement">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Extracto Bancario</span>
+                    </a>
+                    <a href="#" class="nav-item" data-section="certificate">
+                        <i class="fas fa-certificate"></i>
+                        <span>Certificado Bancario</span>
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="logout-btn" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Cerrar Sesión</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Contenido principal -->
+        <main class="main-content">
+            <header class="content-header">
+                <div class="header-title">
+                    <h2 id="sectionTitle">Resumen de Cuenta</h2>
+                    <p class="subtitle">Gestiona tu cuenta bancaria de forma segura</p>
+                </div>
+                <div class="header-actions">
+                    <div class="last-login">
+                        <i class="fas fa-clock"></i>
+                        <span id="lastLogin">Último acceso: Ahora</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- SECCIÓN: Resumen de Cuenta -->
+            <section id="dashboardSection" class="content-section active">
+                <div class="account-summary">
+                    <div class="summary-cards">
+                        <div class="summary-card balance-card">
+                            <div class="card-icon">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>Saldo Actual</h3>
+                                <div class="balance-amount" id="currentBalance">$0.00</div>
+                                <span class="balance-label">Cuenta Principal</span>
+                            </div>
+                        </div>
+
+                        <div class="summary-card">
+                            <div class="card-icon info">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>Número de Cuenta</h3>
+                                <div class="account-number" id="accountNumberDisplay">****-****-**1234</div>
+                                <span class="period">Cuenta Corriente</span>
+                            </div>
+                        </div>
+
+                        <div class="summary-card">
+                            <div class="card-icon success">
+                                <i class="fas fa-calendar"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>Fecha de Creación</h3>
+                                <div class="amount" id="accountCreationDate">Hoy</div>
+                                <span class="period">Miembro activo</span>
+                            </div>
+                        </div>
+
+                        <div class="summary-card">
+                            <div class="card-icon warning">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="card-content">
+                                <h3>Total Transacciones</h3>
+                                <div class="amount" id="totalTransactions">0</div>
+                                <span class="period">Este mes</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Información personal -->
+                    <div class="account-info-grid">
+                        <div class="info-card">
+                            <h3><i class="fas fa-user"></i> Información Personal</h3>
+                            <div class="info-content">
+                                <div class="info-item">
+                                    <span class="label">Nombre Completo:</span>
+                                    <span class="value" id="fullName">Cargando...</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="label">Email:</span>
+                                    <span class="value" id="emailDisplay">cargando@email.com</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="label">Estado de Cuenta:</span>
+                                    <span class="value status active">Activa</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-card">
+                            <h3><i class="fas fa-chart-bar"></i> Actividad Reciente</h3>
+                            <div class="info-content" id="recentActivity">
+                                <div class="no-transactions">
+                                    <i class="fas fa-info-circle"></i>
+                                    <p>No hay transacciones recientes</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN: Resumen de Transacciones -->
+            <section id="transactionsSection" class="content-section">
+                <div class="transactions-container">
+                    <div class="section-header">
+                        <h3><i class="fas fa-exchange-alt"></i> Últimas 10 Transacciones</h3>
+                        <button class="print-btn" onclick="printTransactions()">
+                            <i class="fas fa-print"></i> Imprimir Resumen
+                        </button>
+                    </div>
+
+                    <div class="transactions-table" id="transactionsTable">
+                        <div class="no-transactions">
+                            <i class="fas fa-info-circle"></i>
+                            <p>No hay transacciones registradas</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN: Transferir Dinero -->
+            <section id="transferSection" class="content-section">
+                <div class="form-container">
+                    <div class="form-header">
+                        <h3><i class="fas fa-paper-plane"></i> Transferir Dinero</h3>
+                        <p>Envía dinero de forma segura a otros usuarios registrados</p>
+                    </div>
+
+                    <div class="account-info-display">
+                        <div class="info-row">
+                            <span class="label">Tu Cuenta:</span>
+                            <span class="value" id="transferFromAccount">****-****-**1234</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Titular:</span>
+                            <span class="value" id="transferFromHolder">Cargando...</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Saldo Disponible:</span>
+                            <span class="value" id="transferAvailableBalance">$0.00</span>
+                        </div>
+                    </div>
+
+                    <!-- Paso 1: Buscar Usuario Destinatario -->
+                    <div class="transfer-step" id="searchUserStep">
+                        <h4><i class="fas fa-search"></i> Buscar Usuario Destinatario</h4>
+
+                        <form class="search-form" id="searchUserForm">
+                            <div class="form-group">
+                                <label for="recipientSearch">Email del destinatario</label>
+                                <input type="email" id="recipientSearch" placeholder="ejemplo@email.com" required>
+                                <small>Ingresa el email del usuario al que deseas transferir</small>
+                            </div>
+
+                            <button type="submit" class="search-btn">
+                                <i class="fas fa-search"></i> Buscar Usuario
+                            </button>
+                        </form>
+
+                        <div class="search-results" id="searchResults" style="display: none;">
+                            <!-- Resultados de búsqueda se mostrarán aquí -->
+                        </div>
+                    </div>
+
+                    <!-- Paso 2: Confirmar Destinatario y Monto -->
+                    <div class="transfer-step" id="transferFormStep" style="display: none;">
+                        <h4><i class="fas fa-user-check"></i> Confirmar Transferencia</h4>
+
+                        <div class="recipient-info" id="recipientInfo">
+                            <!-- Información del destinatario se mostrará aquí -->
+                        </div>
+
+                        <form class="transaction-form" id="transferForm">
+                            <div class="form-group">
+                                <label for="transferAmount">Cantidad a Transferir</label>
+                                <input type="number" id="transferAmount" min="1000" step="1000" required>
+                                <small>Monto mínimo: $1,000</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="transferDescription">Descripción (Opcional)</label>
+                                <input type="text" id="transferDescription" placeholder="Concepto de la transferencia"
+                                    maxlength="100">
+                                <small>Máximo 100 caracteres</small>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="cancel-btn" onclick="cancelTransfer()">
+                                    <i class="fas fa-times"></i> Cancelar
+                                </button>
+                                <button type="submit" class="submit-btn">
+                                    <i class="fas fa-paper-plane"></i> Realizar Transferencia
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Paso 3: Confirmación de Transferencia -->
+                    <div class="transfer-step" id="transferConfirmStep" style="display: none;">
+                        <div class="confirmation-content">
+                            <div class="confirmation-header">
+                                <i class="fas fa-shield-alt"></i>
+                                <h4>Confirma tu Transferencia</h4>
+                                <p>Revisa los detalles antes de continuar</p>
+                            </div>
+
+                            <div class="transfer-summary" id="transferSummary">
+                                <!-- Resumen de transferencia -->
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="cancel-btn" onclick="cancelTransfer()">
+                                    <i class="fas fa-times"></i> Cancelar
+                                </button>
+                                <button type="button" class="confirm-btn" onclick="confirmTransfer()">
+                                    <i class="fas fa-check"></i> Confirmar Transferencia
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN: Consignación -->
+            <section id="depositSection" class="content-section">
+                <div class="form-container">
+                    <div class="form-header">
+                        <h3><i class="fas fa-plus-circle"></i> Consignación Electrónica</h3>
+                        <p>Realiza una consignación a tu cuenta</p>
+                    </div>
+
+                    <div class="account-info-display">
+                        <div class="info-row">
+                            <span class="label">Número de Cuenta:</span>
+                            <span class="value" id="depositAccountNumber">****-****-**1234</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Titular:</span>
+                            <span class="value" id="depositAccountHolder">Cargando...</span>
+                        </div>
+                    </div>
+
+                    <form class="transaction-form" id="depositForm">
+                        <div class="form-group">
+                            <label for="depositAmount">Cantidad a Consignar</label>
+                            <input type="number" id="depositAmount" min="1000" step="1000" required>
+                            <small>Monto mínimo: $1,000</small>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-plus"></i> Realizar Consignación
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- SECCIÓN: Retiro -->
+            <section id="withdrawalSection" class="content-section">
+                <div class="form-container">
+                    <div class="form-header">
+                        <h3><i class="fas fa-minus-circle"></i> Retiro de Dinero</h3>
+                        <p>Retira dinero de tu cuenta</p>
+                    </div>
+
+                    <div class="account-info-display">
+                        <div class="info-row">
+                            <span class="label">Número de Cuenta:</span>
+                            <span class="value" id="withdrawalAccountNumber">****-****-**1234</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Titular:</span>
+                            <span class="value" id="withdrawalAccountHolder">Cargando...</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Saldo Disponible:</span>
+                            <span class="value" id="withdrawalBalance">$0.00</span>
+                        </div>
+                    </div>
+
+                    <form class="transaction-form" id="withdrawalForm">
+                        <div class="form-group">
+                            <label for="withdrawalAmount">Cantidad a Retirar</label>
+                            <input type="number" id="withdrawalAmount" min="10000" step="10000" required>
+                            <small>Monto mínimo: $10,000</small>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-minus"></i> Realizar Retiro
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- SECCIÓN: Pago de Servicios -->
+            <section id="billsSection" class="content-section">
+                <div class="form-container">
+                    <div class="form-header">
+                        <h3><i class="fas fa-file-invoice-dollar"></i> Pago de Servicios Públicos</h3>
+                        <p>Paga tus servicios públicos de forma fácil y segura</p>
+                    </div>
+
+                    <div class="account-info-display">
+                        <div class="info-row">
+                            <span class="label">Número de Cuenta:</span>
+                            <span class="value" id="billsAccountNumber">****-****-**1234</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Titular:</span>
+                            <span class="value" id="billsAccountHolder">Cargando...</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Saldo Disponible:</span>
+                            <span class="value" id="billsBalance">$0.00</span>
+                        </div>
+                    </div>
+
+                    <form class="transaction-form" id="billsForm">
+                        <div class="form-group">
+                            <label for="serviceType">Tipo de Servicio</label>
+                            <select id="serviceType" required>
+                                <option value="">Seleccionar servicio</option>
+                                <option value="Energía">Energía Eléctrica</option>
+                                <option value="Agua">Acueducto y Alcantarillado</option>
+                                <option value="Gas Natural">Gas Natural</option>
+                                <option value="Internet">Internet/Telecomunicaciones</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="serviceReference">Referencia del Servicio</label>
+                            <input type="text" id="serviceReference" required>
+                            <small>Número de factura o código de referencia</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="billAmount">Valor a Pagar</label>
+                            <input type="number" id="billAmount" min="1000" step="100" required>
+                            <small>Monto mínimo: $1,000</small>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-credit-card"></i> Pagar Servicio
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- SECCIÓN: Extracto Bancario -->
+            <section id="statementSection" class="content-section">
+                <div class="form-container">
+                    <div class="form-header">
+                        <h3><i class="fas fa-file-alt"></i> Extracto Bancario</h3>
+                        <p>Consulta el extracto de movimientos por mes y año</p>
+                    </div>
+
+                    <div class="account-info-display">
+                        <div class="info-row">
+                            <span class="label">Número de Cuenta:</span>
+                            <span class="value" id="statementAccountNumber">****-****-**1234</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="label">Titular:</span>
+                            <span class="value" id="statementAccountHolder">Cargando...</span>
+                        </div>
+                    </div>
+
+                    <form class="transaction-form" id="statementForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="statementYear">Año</label>
+                                <select id="statementYear" required></select>
+                            </div>
+                            <div class="form-group">
+                                <label for="statementMonth">Mes</label>
+                                <select id="statementMonth" required>
+                                    <option value="">Seleccionar mes</option>
+                                    <option value="01">Enero</option>
+                                    <option value="02">Febrero</option>
+                                    <option value="03">Marzo</option>
+                                    <option value="04">Abril</option>
+                                    <option value="05">Mayo</option>
+                                    <option value="06">Junio</option>
+                                    <option value="07">Julio</option>
+                                    <option value="08">Agosto</option>
+                                    <option value="09">Septiembre</option>
+                                    <option value="10">Octubre</option>
+                                    <option value="11">Noviembre</option>
+                                    <option value="12">Diciembre</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-search"></i> Generar Extracto
+                        </button>
+                    </form>
+
+                    <div class="statement-results" id="statementResults" style="display: none;">
+                        <div class="section-header">
+                            <h4>Extracto Bancario</h4>
+                            <button class="print-btn" onclick="printStatement()">
+                                <i class="fas fa-print"></i> Imprimir Extracto
+                            </button>
+                        </div>
+                        <div id="statementTable"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECCIÓN: Certificado Bancario -->
+            <section id="certificateSection" class="content-section">
+                <div class="certificate-container">
+                    <div class="section-header">
+                        <h3><i class="fas fa-certificate"></i> Certificado Bancario</h3>
+                        <button class="print-btn" onclick="printCertificate()">
+                            <i class="fas fa-print"></i> Imprimir Certificado
+                        </button>
+                    </div>
+
+                    <div class="certificate" id="certificateContent">
+                        <div class="certificate-header">
+                            <div class="bank-logo">
+                                <i class="fas fa-university"></i>
+                                <h2>BANCO ACME</h2>
+                            </div>
+                            <div class="certificate-title">
+                                <h3>CERTIFICADO DE CUENTA BANCARIA</h3>
+                            </div>
+                        </div>
+
+                        <div class="certificate-body">
+                            <p class="certificate-text">
+                                El <strong>BANCO ACME</strong>, entidad financiera legalmente constituida,
+                                <strong>CERTIFICA</strong> que:
+                            </p>
+
+                            <div class="certificate-info">
+                                <p><strong id="certificateHolderName">NOMBRE DEL TITULAR</strong>,
+                                    identificado(a) con el documento registrado en nuestro sistema,
+                                    es titular de una <strong>CUENTA CORRIENTE</strong> activa en nuestra entidad.</p>
+
+                                <div class="account-details">
+                                    <p><strong>Número de Cuenta:</strong> <span
+                                            id="certificateAccountNumber">****-****-**1234</span></p>
+                                    <p><strong>Fecha de Apertura:</strong> <span id="certificateCreationDate">Fecha de
+                                            creación</span></p>
+                                    <p><strong>Estado de la Cuenta:</strong> <span class="status-active">ACTIVA</span>
+                                    </p>
+                                    <p><strong>Tipo de Cuenta:</strong> Cuenta Corriente</p>
+                                </div>
+
+                                <p class="certificate-footer-text">
+                                    Esta certificación se expide a solicitud del interesado para los fines que
+                                    considere convenientes, en la ciudad de Bucaramanga, Santander, Colombia.
+                                </p>
+                            </div>
+
+                            <div class="certificate-footer">
+                                <div class="date-issued">
+                                    <p><strong>Fecha de Expedición:</strong> <span id="certificateIssueDate"></span></p>
+                                </div>
+
+                                <div class="signature-section">
+                                    <div class="signature-line"></div>
+                                    <p><strong>BANCO ACME</strong></p>
+                                    <p>Gerencia General</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Modal de Resumen de Transacción -->
+            <div id="transactionModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3><i class="fas fa-receipt"></i> Resumen de Transacción</h3>
+                        <button class="close-modal" onclick="closeTransactionModal()">×</button>
+                    </div>
+                    <div class="modal-body" id="transactionSummary">
+                        <!-- Contenido dinámico -->
+                    </div>
+                    <div class="modal-footer">
+                        <button class="print-btn" onclick="printTransactionSummary()">
+                            <i class="fas fa-print"></i> Imprimir Resumen
+                        </button>
+                        <button class="cancel-btn" onclick="closeTransactionModal()">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Sistema de notificaciones -->
+    <div id="notification" class="notification hidden" role="alert" aria-live="polite">
+        <div class="notification-content">
+            <i class="notification-icon"></i>
+            <span class="notification-message"></span>
+            <button class="notification-close" type="button" aria-label="Cerrar notificación">×</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="../incio/firebase-config.js"></script>
+    <script src="dashboard-app.js"></script>
+</body>
+
+</html>

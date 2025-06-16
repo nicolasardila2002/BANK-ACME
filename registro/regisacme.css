@@ -1,0 +1,402 @@
+/* ===================================
+   REGISTRO DE USUARIOS - ESTILOS
+   =================================== */
+
+/* Reset y configuración base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Colores principales */
+    --primary-blue: #2a5298;
+    --primary-dark: #aeb3bc;
+    --accent-blue: #007bff;
+    --success-green: #28a745;
+    --error-red: #dc3545;
+    --warning-orange: #ffc107;
+    --info-cyan: #17a2b8;
+    
+    /* Colores neutros */
+    --white: #ffffff;
+    --light-gray: #f8f9fa;
+    --medium-gray: #e0e0e0;
+    --dark-gray: #666666;
+    --text-dark: #f3dada;
+    
+    /* Sombras */
+    --shadow-light: 0 2px 10px rgba(0, 0, 0, 0.1);
+    --shadow-medium: 0 10px 25px rgba(0, 0, 0, 0.15);
+    --shadow-heavy: 0 20px 40px rgba(0, 0, 0, 0.2);
+    
+    /* Bordes */
+    --border-radius: 10px;
+    --border-radius-large: 20px;
+    
+    /* Transiciones */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    
+    /* Fuentes */
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-size-small: 0.875rem;
+    --font-size-normal: 1rem;
+    --font-size-large: 1.125rem;
+    --font-size-xl: 1.5rem;
+    --font-size-xxl: 2rem;
+}
+
+/* Elementos base */
+body {
+    font-family: var(--font-family);
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-blue) 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    line-height: 1.6;
+}
+
+/* Contenedor principal */
+.container {
+    width: 100%;
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: var(--border-radius-large);
+    padding: 2.5rem 2rem;
+    box-shadow: var(--shadow-heavy);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: transform var(--transition-normal);
+    position: relative;
+}
+
+.container:hover {
+    transform: translateY(-2px);
+}
+
+/* Título del formulario */
+.container h2 {
+    text-align: center;
+    color: var(--primary-blue);
+    margin-bottom: 2rem;
+    font-weight: 600;
+    font-size: var(--font-size-xl);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Formulario */
+#registro-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Inputs de texto, email, password, tel */
+#registro-form input[type="text"],
+#registro-form input[type="email"],
+#registro-form input[type="password"],
+#registro-form input[type="tel"] {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    border: 2px solid var(--medium-gray);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-normal);
+    font-family: inherit;
+    background: var(--white);
+    transition: all var(--transition-normal);
+    color: var(--text-dark);
+}
+
+#registro-form input[type="text"]:focus,
+#registro-form input[type="email"]:focus,
+#registro-form input[type="password"]:focus,
+#registro-form input[type="tel"]:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.1);
+    background: var(--white);
+}
+
+/* Select dropdown */
+#tipo-id {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    border: 2px solid var(--medium-gray);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-normal);
+    font-family: inherit;
+    background: var(--white);
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1rem;
+    padding-right: 3rem;
+}
+
+#tipo-id:focus {
+    outline: none;
+    border-color: var(--primary-blue);
+    box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.1);
+}
+
+#tipo-id option {
+    padding: 0.5rem;
+    background: var(--white);
+    color: var(--text-dark);
+}
+
+/* Contenedor de género */
+.genero-container {
+    display: flex;
+    gap: 2rem;
+    padding: 1rem 0;
+    justify-content: center;
+}
+
+.genero-container label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: var(--font-size-normal);
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: color var(--transition-fast);
+}
+
+.genero-container label:hover {
+    color: var(--primary-blue);
+}
+
+.genero-container input[type="radio"] {
+    width: 1.25rem;
+    height: 1.25rem;
+    accent-color: var(--primary-blue);
+    cursor: pointer;
+}
+
+/* Botón de registro */
+button[type="submit"] {
+    width: 100%;
+    padding: 1rem;
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-dark));
+    color: var(--white);
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-normal);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    font-family: inherit;
+    margin-top: 1rem;
+}
+
+button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(42, 82, 152, 0.3);
+}
+
+button[type="submit"]:focus {
+    outline: 3px solid rgba(42, 82, 152, 0.5);
+    outline-offset: 2px;
+}
+
+button[type="submit"]:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Mensajes de registro */
+#mensaje-registro {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    text-align: center;
+    font-weight: 500;
+    display: none;
+}
+
+#mensaje-registro.success {
+    background: linear-gradient(135deg, var(--success-green), #20c997);
+    color: var(--white);
+    display: block;
+}
+
+#mensaje-registro.error {
+    background: linear-gradient(135deg, var(--error-red), #e74c3c);
+    color: var(--white);
+    display: block;
+}
+
+#mensaje-registro.info {
+    background: linear-gradient(135deg, var(--info-cyan), var(--accent-blue));
+    color: var(--white);
+    display: block;
+}
+
+/* Placeholders */
+::placeholder {
+    color: var(--dark-gray);
+    opacity: 0.7;
+}
+
+/* ===================================
+   RESPONSIVE DESIGN
+   =================================== */
+
+/* Tablets */
+@media (max-width: 768px) {
+    body {
+        padding: 0.75rem;
+    }
+    
+    .container {
+        max-width: 100%;
+        padding: 2rem 1.5rem;
+    }
+    
+    .genero-container {
+        gap: 1.5rem;
+    }
+}
+
+/* Móviles grandes */
+@media (max-width: 480px) {
+    body {
+        padding: 0.5rem;
+        align-items: flex-start;
+        padding-top: 2rem;
+    }
+    
+    .container {
+        padding: 1.5rem 1.25rem;
+    }
+    
+    .container h2 {
+        font-size: var(--font-size-large);
+        margin-bottom: 1.5rem;
+    }
+    
+    #registro-form {
+        gap: 1.25rem;
+    }
+    
+    #registro-form input[type="text"],
+    #registro-form input[type="email"],
+    #registro-form input[type="password"],
+    #registro-form input[type="tel"],
+    #tipo-id {
+        padding: 0.875rem 1rem;
+        font-size: 1rem;
+    }
+    
+    .genero-container {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+        padding: 0.5rem 0;
+    }
+    
+    button[type="submit"] {
+        padding: 0.875rem;
+    }
+}
+
+/* Móviles pequeños */
+@media (max-width: 320px) {
+    .container {
+        padding: 1.25rem 1rem;
+    }
+    
+    .container h2 {
+        font-size: 1.25rem;
+    }
+    
+    #registro-form input[type="text"],
+    #registro-form input[type="email"],
+    #registro-form input[type="password"],
+    #registro-form input[type="tel"],
+    #tipo-id {
+        padding: 0.75rem;
+        font-size: 0.875rem;
+    }
+}
+
+/* Landscape móviles */
+@media (max-height: 500px) and (orientation: landscape) {
+    body {
+        align-items: flex-start;
+        padding-top: 1rem;
+    }
+    
+    .container {
+        padding: 1.5rem;
+    }
+    
+    .container h2 {
+        margin-bottom: 1rem;
+        font-size: var(--font-size-large);
+    }
+    
+    #registro-form {
+        gap: 1rem;
+    }
+}
+
+/* Modo oscuro */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --light-gray: #2d3748;
+        --medium-gray: #4a5568;
+        --dark-gray: #a0aec0;
+        --text-dark: #f7fafc;
+    }
+    
+    .container {
+        background: rgba(45, 55, 72, 0.95);
+        color: var(--text-dark);
+    }
+    
+    #registro-form input[type="text"],
+    #registro-form input[type="email"],
+    #registro-form input[type="password"],
+    #registro-form input[type="tel"],
+    #tipo-id {
+        background: #2d3748;
+        color: var(--text-dark);
+        border-color: #4a5568;
+    }
+    
+    #registro-form input[type="text"]:focus,
+    #registro-form input[type="email"]:focus,
+    #registro-form input[type="password"]:focus,
+    #registro-form input[type="tel"]:focus,
+    #tipo-id:focus {
+        background: #4a5568;
+    }
+    
+    #tipo-id option {
+        background: #2d3748;
+        color: var(--text-dark);
+    }
+}
+
+/* Reducir movimiento */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
