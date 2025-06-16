@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banco ACME - Acceso Seguro</title>
+    
+    <!-- Enlaces a archivos CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏦</text></svg>">
+</head>
+<body>
+    <div class="container">
+        <div class="login-container">
+            <!-- Header del Banco -->
+            <header class="bank-header">
+                <div class="logo">
+                    <i class="fas fa-university"></i>
+                    <h1>BANCO ACME</h1>
+                </div>
+                <p class="tagline">Banca Digital Segura</p>
+            </header>
+
+            <main class="login-form-container">
+                <h2>Acceso a su Cuenta</h2>
+                
+                <!-- Formulario de Login -->
+                <form id="loginForm" class="login-form">
+                    <div class="input-group">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                        <input type="email" id="email" placeholder="Correo electrónico" required autocomplete="email">
+                        <label for="email" class="sr-only">Correo electrónico</label>
+                    </div>
+                    
+                    <div class="input-group">
+                        <i class="fas fa-lock" aria-hidden="true"></i>
+                        <input type="password" id="password" placeholder="Contraseña" required autocomplete="current-password">
+                        <label for="password" class="sr-only">Contraseña</label>
+                        <button type="button" class="toggle-password" id="togglePassword" aria-label="Mostrar/Ocultar contraseña">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    
+                    <button type="submit" class="login-btn" id="loginBtn">
+                        <span class="btn-text">Iniciar Sesión</span>
+                        <div class="loading-spinner hidden" aria-hidden="true">
+                            <i class="fas fa-spinner fa-spin"></i>
+                        </div>
+                    </button>
+                </form>
+
+                <!-- Enlaces del formulario -->
+                <div class="form-footer">
+                    <a href="/reset/reset.html" class="forgot-password">¿Olvidó su contraseña?</a>
+                    <div class="register-link">
+                        ¿No tiene cuenta? <a href="/registro/regisacme.html" id="showRegister">Registrarse</a>
+                    </div>
+                </div>
+
+                <!-- Formulario de Registro (oculto inicialmente) -->
+                <form id="registerForm" class="register-form hidden">
+                    <h2>Crear Cuenta Nueva</h2>
+                    
+                    <div class="input-group">
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                        <input type="text" id="fullName" placeholder="Nombre completo" required autocomplete="name">
+                        <label for="fullName" class="sr-only">Nombre completo</label>
+                    </div>
+                    
+                    <div class="input-group">
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                        <input type="email" id="registerEmail" placeholder="Correo electrónico" required autocomplete="email">
+                        <label for="registerEmail" class="sr-only">Correo electrónico</label>
+                    </div>
+                    
+                    <div class="input-group">
+                        <i class="fas fa-lock" aria-hidden="true"></i>
+                        <input type="password" id="registerPassword" placeholder="Contraseña" required autocomplete="new-password">
+                        <label for="registerPassword" class="sr-only">Contraseña</label>
+                        <button type="button" class="toggle-password" id="toggleRegisterPassword" aria-label="Mostrar/Ocultar contraseña">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="input-group">
+                        <i class="fas fa-lock" aria-hidden="true"></i>
+                        <input type="password" id="confirmPassword" placeholder="Confirmar contraseña" required autocomplete="new-password">
+                        <label for="confirmPassword" class="sr-only">Confirmar contraseña</label>
+                    </div>
+                    
+                    <div class="password-requirements">
+                        <small>La contraseña debe tener al menos 6 caracteres</small>
+                    </div>
+                    
+                    <button type="submit" class="login-btn" id="registerBtn">
+                        <span class="btn-text">Crear Cuenta</span>
+                        <div class="loading-spinner hidden" aria-hidden="true">
+                            <i class="fas fa-spinner fa-spin"></i>
+                        </div>
+                    </button>
+                    
+                    <div class="back-to-login">
+                        <a href="#" id="backToLogin">← Volver al inicio de sesión</a>
+                    </div>
+                </form>
+            </main>
+        </div>
+
+        <!-- Sistema de notificaciones -->
+        <div id="notification" class="notification hidden" role="alert" aria-live="polite">
+            <div class="notification-content">
+                <i class="notification-icon" aria-hidden="true"></i>
+                <span class="notification-message"></span>
+                <button class="notification-close" type="button" aria-label="Cerrar notificación">×</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="firebase-config.js"></script>
+    <script src="app.js"></script>
+    <script src="respaldo.js"></script>
+    <script src="diagnostico.js"></script>
+    <script src="auto.js"></script>
+    <script src="emergencia.js"></script>
+
+    
+   
+</body>
+</html>

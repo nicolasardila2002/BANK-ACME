@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuarios</title>
+    <link rel="stylesheet" href="regisacme.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Registro de Usuario</h2>
+        <form id="registro-form">
+            <input type="text" id="nombre" placeholder="Nombre" required>
+            <input type="text" id="apellidos" placeholder="Apellidos" required>
+            
+            <select id="tipo-id" required>
+                <option value="" disabled selected>Seleccione tipo de ID</option>
+                <option value="Cedula de ciudadanía">Cédula de ciudadanía</option>
+                <option value="Cedula de extranjería">Cédula de extranjería</option>
+                <option value="Pasaporte">Pasaporte</option>
+            </select>
+
+            <input type="text" id="numero-id" placeholder="Número de ID" required>
+            <input type="tel" id="telefono" placeholder="Número de teléfono" required>
+            <input type="text" id="direccion" placeholder="Dirección" required>
+            <input type="text" id="ciudad" placeholder="Ciudad de residencia" required>
+
+            <div class="genero-container">
+                <label><input type="radio" name="genero" value="Masculino" required> Masculino</label>
+                <label><input type="radio" name="genero" value="Femenino"> Femenino</label>
+            </div>
+            <input type="email" id="email" placeholder="Correo electrónico" required>
+            <input type="password" id="password" placeholder="Contraseña" required>
+            <input type="password" id="confirm-password" placeholder="Confirmar contraseña" required>
+
+            <button type="submit">Registrarse</button>
+        </form>
+
+        <!-- Mensajes de registro -->
+        <div id="mensaje-registro"></div>
+    </div>
+    <script type="module" src="registroacme.js"></script>
+  
+</body>
+</html>
