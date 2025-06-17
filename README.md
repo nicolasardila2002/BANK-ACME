@@ -1,4 +1,4 @@
-# Portal Transaccional – Acme Bank
+# Portal Transaccional – Acme Bank (Nicolas Ardila y Carlos Cisneros)
 
 ## Descripción del Proyecto
 El Banco Acme ha desarrollado una aplicación web que permite a los usuarios la autogestión de sus cuentas bancarias. Esta aplicación incluye funcionalidades clave como la creación de cuentas, acceso seguro con credenciales, consulta de saldo y transacciones, consignaciones, retiros y pago de servicios públicos.
